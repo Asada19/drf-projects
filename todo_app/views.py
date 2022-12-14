@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.response import Response
@@ -54,12 +53,10 @@ class ToDoListItemDetailView(APIView):
     def get_object(self, pk):
         return ToDoItem.objects.get(pk=pk)
 
-    @swagger_auto_schema(request_body=ToDoItemSerializer(),
-                         operation_summary='Updates a certain To Do List Item')
+    @swagger_auto_schema(request_body=ToDoItemSerializer(), operation_summary='Updates a certain To Do List Item')
     def put(self, request, pk):
         todo_list_item = self.get_object(pk)
         serializer = ToDoItemSerializer(todo_list_item, data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

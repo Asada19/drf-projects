@@ -30,7 +30,6 @@ class ToDoItemSerializer(serializers.ModelSerializer):
             title=validated_data['title'],
             description=validated_data['description'],
             due_date=validated_data.get('due_date', None),
-            todo_list=validated_data.get('todo_list')
         )
         todo_item.save()
 
